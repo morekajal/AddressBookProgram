@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class AddressBook {
 
-	public String[] AddYourDetails() {
+	public String[] addYourDetails() {
 		Scanner input = new Scanner(System.in);
 		//char[] crossBoard = new char[8];
 		String[] details = new String[8];
@@ -34,7 +34,7 @@ public class AddressBook {
 		return details;
 	}
  
-	public void EditYourDetails(String[] details) {
+	public void editYourDetails(String[] details) {
 		System.out.println("If you want to edit the details press 1 else press 0");
 		Scanner sc = new Scanner(System.in);
 		int modify = sc.nextInt();
@@ -102,10 +102,37 @@ public class AddressBook {
 			System.out.println("You Input Is Invalid");
 	}
 	
+	public void deleteDetails(String[] contact) {
+		System.out.println("Enter the first name of the contact you want to delete");
+		Scanner sc = new Scanner(System.in);
+		String personName = sc.next();
+		if (contact[0].equals(personName)) {
+			for (int j = 0; j < contact.length; j++) {
+				contact[j] = " ";
+				System.out.println(contact[j]);
+			}
+			System.out.println("The Information has been Deleted");
+		} 
+		else {
+			System.out.println("Contact name Invalid to modify");
+		}
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("***Welcome to Address Book Program***");
 		AddressBook details = new AddressBook();
-		String[] info = details.AddYourDetails();
-		details.EditYourDetails(info);
+		String[] info = details.addYourDetails();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("1. Edit Contact\n2. Delete Contact");
+		int choose = sc.nextInt();
+		switch(choose) {
+		case 1:
+			details.editYourDetails(info);
+			break;
+		case 2:
+			details.deleteDetails(info);
+			break;
+		}
+		System.out.println("Your Address Book is Updated");
 	}
 }
